@@ -4,37 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spriteland Fan Game Guide</title>
-    <!-- Pixelated 8-bit font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Define 8-bit color palette and font */
+
         :root {
-            --color-bg-dark: #1a1a1a; /* Very dark grey, almost black */
-            --color-bg-medium: #2c2c2c; /* Slightly lighter dark grey for sections */
-            --color-text-light: #e0e0e0; /* Light grey for general text */
-            --color-accent-yellow: #ffe600; /* Bright yellow for accents */
-            --color-border-grey: #444444; /* Darker grey for subtle borders */
+            --color-bg-dark: #1a1a1a; 
+            --color-bg-medium: #2c2c2c;
+            --color-text-light: #e0e0e0; 
+            --color-accent-yellow: #ffe600;
+            --color-border-grey: #444444;
             --font-8bit: 'Press Start 2P', cursive;
         }
 
-        /* General Body Styles */
+        
         body {
             font-family: var(--font-8bit);
             background-color: var(--color-bg-dark);
             color: var(--color-text-light);
-            -webkit-font-smoothing: crisp-edges; /* For sharper pixel look */
-            text-rendering: optimizeSpeed; /* Optimize for speed over font quality */
+            -webkit-font-smoothing: crisp-edges;
+            text-rendering: optimizeSpeed; 
             margin: 0;
             padding: 0;
-            font-size: 0.8rem; /* Smaller base font size for 8-bit feel */
+            font-size: 0.8rem; 
             line-height: 1.5;
         }
 
-        /* Adjust larger text elements for readability with pixel font */
+        
         h1 { font-size: 2rem; line-height: 1; }
         h2 { font-size: 1.5rem; }
         h3 { font-size: 1.1rem; }
-        /* Slightly reduce font size for links and small text for better pixel render */
+
         nav ul li a,
         .card-item p,
         .card-item ul,
@@ -44,49 +43,46 @@
             font-size: 0.75rem;
         }
 
-
-        /* Container for main content */
         .container {
-            max-width: 1024px; /* Slightly narrower to emphasize blockiness */
+            max-width: 1024px;
             margin-left: auto;
             margin-right: auto;
-            padding: 0.5rem; /* Reduced padding for 8-bit feel */
-            box-sizing: border-box; /* Include padding in element's total width and height */
+            padding: 0.5rem; 
+            box-sizing: border-box; 
         }
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) { 
             .container {
                 padding: 1rem;
             }
         }
 
-        /* Header Section */
         header {
-            background-color: black; /* Solid black for header */
-            color: var(--color-accent-yellow); /* Yellow text */
-            padding: 1rem; /* Reduced padding */
-            border-bottom: 4px solid var(--color-accent-yellow); /* Bold yellow border */
+            background-color: black; 
+            color: var(--color-accent-yellow); 
+            padding: 1rem; 
+            border-bottom: 4px solid var(--color-accent-yellow); 
             text-align: center;
         }
 
         header .container {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center items horizontally in column */
-            justify-content: center; /* Center items vertically */
-            gap: 1rem; /* Space between title and nav */
+            align-items: center;
+            justify-content: center; 
+            gap: 1rem; 
         }
 
-        @media (min-width: 768px) { /* md breakpoint */
+        @media (min-width: 768px) { 
             header .container {
                 flex-direction: row;
-                justify-content: center; /* Center items horizontally in row */
-                gap: 2rem; /* More space between title and nav on larger screens */
+                justify-content: center; 
+                gap: 2rem; 
             }
         }
 
         header h1 {
             font-weight: 800;
-            margin-bottom: 0; /* Remove margin-bottom from h1 */
+            margin-bottom: 0; 
         }
 
         header nav ul {
@@ -94,34 +90,33 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            gap: 1rem; /* space-x */
+            gap: 1rem; 
             font-weight: 600;
         }
 
         header nav ul li a {
             color: var(--color-accent-yellow);
             text-decoration: none;
-            text-shadow: 2px 2px 0px #880000; /* Simple pixel shadow */
-            transition: color 0.1s linear; /* Fast transition */
+            text-shadow: 2px 2px 0px #880000; 
+            transition: color 0.1s linear; 
         }
 
         header nav ul li a:hover {
-            color: white; /* Hover to white */
+            color: white; 
         }
 
-        /* Section Styling */
         section {
             background-color: var(--color-bg-medium);
-            padding: 1.5rem; /* Reduced padding */
-            border: 2px solid var(--color-accent-yellow); /* Yellow border */
-            margin-bottom: 2rem; /* Spacing between sections */
+            padding: 1.5rem; 
+            border: 2px solid var(--color-accent-yellow); 
+            margin-bottom: 2rem;
         }
 
         section h2 {
             font-weight: 700;
             color: var(--color-accent-yellow);
             margin-bottom: 1rem;
-            text-shadow: 1px 1px 0px black; /* Simple pixel shadow */
+            text-shadow: 1px 1px 0px black; 
         }
 
         section p {
@@ -133,7 +128,6 @@
             margin-bottom: 0;
         }
 
-        /* Card Layout for Monsters */
         .card-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -155,27 +149,27 @@
             padding: 1rem;
             border: 2px solid var(--color-border-grey);
             transition: border-color 0.1s linear;
-            text-align: center; /* Center content in cards */
+            text-align: center;
         }
 
         .card-item:hover {
-            border-color: var(--color-accent-yellow); /* Yellow border on hover */
+            border-color: var(--color-accent-yellow);
         }
 
         .card-item img {
-            width: 5rem; /* Smaller images */
+            width: 5rem;
             height: 5rem;
             margin-left: auto;
             margin-right: auto;
             border: 2px solid var(--color-accent-yellow);
             object-fit: cover;
             margin-bottom: 0.5rem;
-            image-rendering: pixelated; /* Crucial for pixel art images */
-            -ms-interpolation-mode: nearest-neighbor; /* For older browsers */
+            image-rendering: pixelated; 
+            -ms-interpolation-mode: nearest-neighbor; 
         }
 
-        .card-item .img-accent-red { /* For villain/dangerous monster images */
-            border-color: red; /* Red border for villains/dangerous entities */
+        .card-item .img-accent-red { 
+            border-color: red; 
         }
 
         .card-item h3 {
@@ -203,7 +197,6 @@
             color: var(--color-accent-yellow);
         }
 
-        /* Quests Grid Layout */
         .quests-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -223,8 +216,8 @@
         }
 
         .quests-grid ul {
-            list-style-type: none; /* Removed default bullets */
-            padding-left: 0; /* Remove default padding */
+            list-style-type: none; 
+            padding-left: 0; 
             margin: 0;
             line-height: 1.5;
             color: var(--color-text-light);
@@ -232,30 +225,29 @@
 
         .quests-grid ul li {
             position: relative;
-            padding-left: 1.2em; /* Space for custom bullet */
-            margin-bottom: 0.25em; /* Space between list items */
+            padding-left: 1.2em; 
+            margin-bottom: 0.25em; 
         }
 
         .quests-grid ul li::before {
-            content: '>'; /* Custom 8-bit bullet */
+            content: '>'; 
             color: var(--color-accent-yellow);
             position: absolute;
             left: 0;
             top: 0;
         }
 
-        /* Items Table */
         .table-container {
             overflow-x: auto;
-            border: 2px solid var(--color-accent-yellow); /* Yellow border around table container */
-            margin-top: 1rem; /* Add some space above each table */
-            margin-bottom: 2rem; /* Add space below each table */
+            border: 2px solid var(--color-accent-yellow); 
+            margin-top: 1rem; 
+            margin-bottom: 2rem; 
         }
 
         table {
-            width: 100%; /* Use 100% width instead of min-width */
+            width: 100%; 
             background-color: var(--color-bg-dark);
-            border-collapse: collapse; /* Remove space between cells */
+            border-collapse: collapse; 
         }
 
         table thead tr {
@@ -269,7 +261,7 @@
         table th, table td {
             padding: 0.5rem 1rem;
             text-align: left;
-            border: 1px solid var(--color-border-grey); /* Subtle grey borders for cells */
+            border: 1px solid var(--color-border-grey); 
         }
 
         table tbody tr {
@@ -280,7 +272,7 @@
         }
 
         table tbody tr:hover {
-            background-color: #3a3a3a; /* Lighter dark grey on hover */
+            background-color: #3a3a3a;
         }
 
         table td.whitespace-nowrap {
@@ -301,17 +293,17 @@
 
         .faq-answer {
             color: var(--color-text-light);
-            margin-left: 1em; /* Indent answer */
+            margin-left: 1em; 
         }
 
 
-        /* Footer Section */
+        
         footer {
             background-color: black;
             color: var(--color-text-light);
             padding: 1rem;
             margin-top: 2rem;
-            border-top: 4px solid var(--color-accent-yellow); /* Bold yellow border */
+            border-top: 4px solid var(--color-accent-yellow); 
             text-align: center;
         }
 
@@ -338,13 +330,11 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
         <div class="container">
             <h1>
                 SPRITELAND </br></br>FAN GAME GUIDE
             </h1>
-            <!-- Navigation -->
             <nav>
                 <ul>
                     <li><a href="#quests">QUESTS</a></li>
@@ -357,10 +347,9 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
+
     <main class="container">
 
-        <!-- Quests Section -->
         <section id="quests">
             <h2>QUESTS OF SPRITELAND</h2>
             <div class="quests-grid">
@@ -401,11 +390,11 @@
             </div>
         </section>
 
-        <!-- Monsters Section -->
+
         <section id="monsters">
             <h2>MONSTERS OF SPRITELAND</h2>
             <div class="card-grid">
-                <!-- Monster Card 1 -->
+
                 <div class="card-item">
                     <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=GOBLIN" alt="Goblin">
                     <h3>GOBLIN GRUNT</h3>
@@ -417,7 +406,7 @@
                         <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
                     </ul>
                 </div>
-                <!-- Monster Card 2 -->
+
                 <div class="card-item">
                     <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=SLIME" alt="Slime">
                     <h3>SLIME CUBE</h3>
@@ -429,7 +418,7 @@
                         <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
                     </ul>
                 </div>
-                <!-- Monster Card 3 -->
+
                 <div class="card-item">
                     <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=DRAGON" alt="Dragon" class="img-accent-red">
                     <h3>FOREST DRAGON</h3>
@@ -441,7 +430,7 @@
                         <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
                     </ul>
                 </div>
-                <!-- Monster Card 4 -->
+
                 <div class="card-item">
                     <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=SPECTER" alt="Specter">
                     <h3>SHADOW SPECTER</h3>
@@ -456,7 +445,6 @@
             </div>
         </section>
 
-        <!-- Pets Section (New Top-Level Section) -->
         <section id="pets">
             <h2>PETS</h2>
             <div class="table-container">
@@ -477,7 +465,6 @@
             </div>
         </section>
 
-        <!-- Items Section -->
         <section id="items">
             <h2>ESSENTIAL ITEMS</h2>
 
@@ -512,16 +499,16 @@
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Ronin Helm" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RONIN HELM</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Witch Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">WITCH HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Helmet of Liberty" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">HELMET OF LIBERTY</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
-                        <!-- Events -->
+                        
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Fire Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">FIRE HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>13TH MARCH 2025 EVENT</td><td>EVENT REWARD</td></tr>
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Knight Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">KNIGHT HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>27TH MARCH 2025 EVENT</td><td>EVENT REWARD</td></tr>
-                        <!-- Shops -->
+                        
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=BOOTS" alt="Boots of Haste" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BOOTS OF HASTE</td><td>ARMOR (FEET)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>SHOP</td><td>N/A</td></tr>
-                        <!-- From Initial List -->
+                        
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=ARMOR" alt="Dragonbone Armor" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DRAGONBONE ARMOR</td><td>ARMOR (CHEST)</td><td>[LVL REQ]</td><td>HIGH DEFENSE, FIRE RESISTANCE BONUS.</td><td>DEFEAT DRAGON BOSS</td><td>N/A</td></tr>
-                        <!-- MERGED SHIELDS -->
+                        
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=SHIELD" alt="Gold Shield" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">GOLD SHIELD</td><td>ARMOR (SHIELD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
-                        <!-- MERGED ACCESSORIES -->
+                        
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=RING" alt="Ruby Ring" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RUBY RING</td><td>ACCESSORY (RING)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
                         <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=AMULET" alt="Amulet of Wisdom" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">AMULET OF WISDOM</td><td>ACCESSORY (AMULET)</td><td>[LVL REQ]</td><td>+10 INTELLIGENCE, +5% XP GAIN</td><td>REWARD FROM 'LOST SCROLLS' QUEST</td><td>N/A</td></tr>
                     </tbody>
@@ -646,7 +633,6 @@
 
         </section>
 
-        <!-- FAQ Section (New Section) -->
         <section id="faq">
             <h2>FREQUENTLY ASKED QUESTIONS</h2>
 
@@ -689,10 +675,9 @@
 
     </main>
 
-    <!-- Footer Section -->
     <footer>
         <div class="container">
-            <p>&copy; 2024 AWESOME SPRITELAND GUIDE. ALL RIGHTS RESERVED.</p>
+            <p>SPRITELAND FAN GAME GUIDE, LAST UPDATED 06/05/2025</p>
         </div>
     </footer>
 </body>
