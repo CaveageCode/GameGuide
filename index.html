@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Spriteland Guide</title>
+    <!-- Pixelated 8-bit font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Define 8-bit color palette and font */
+        :root {
+            --color-bg-dark: #1a1a1a; /* Very dark grey, almost black */
+            --color-bg-medium: #2c2c2c; /* Slightly lighter dark grey for sections */
+            --color-text-light: #e0e0e0; /* Light grey for general text */
+            --color-accent-yellow: #ffe600; /* Bright yellow for accents */
+            --color-border-grey: #444444; /* Darker grey for subtle borders */
+            --font-8bit: 'Press Start 2P', cursive;
+        }
+
+        /* General Body Styles */
+        body {
+            font-family: var(--font-8bit);
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            -webkit-font-smoothing: crisp-edges; /* For sharper pixel look */
+            text-rendering: optimizeSpeed; /* Optimize for speed over font quality */
+            margin: 0;
+            padding: 0;
+            font-size: 0.8rem; /* Smaller base font size for 8-bit feel */
+            line-height: 1.5;
+        }
+
+        /* Adjust larger text elements for readability with pixel font */
+        h1 { font-size: 2rem; line-height: 1; }
+        h2 { font-size: 1.5rem; }
+        h3 { font-size: 1.1rem; }
+        /* Slightly reduce font size for links and small text for better pixel render */
+        nav ul li a,
+        .card-item p,
+        .card-item ul,
+        table,
+        footer p,
+        footer div a {
+            font-size: 0.75rem;
+        }
+
+
+        /* Container for main content */
+        .container {
+            max-width: 1024px; /* Slightly narrower to emphasize blockiness */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0.5rem; /* Reduced padding for 8-bit feel */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        @media (min-width: 768px) { /* md breakpoint */
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Header Section */
+        header {
+            background-color: black; /* Solid black for header */
+            color: var(--color-accent-yellow); /* Yellow text */
+            padding: 1rem; /* Reduced padding */
+            border-bottom: 4px solid var(--color-accent-yellow); /* Bold yellow border */
+            text-align: center;
+        }
+
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally in column */
+            justify-content: center; /* Center items vertically */
+            gap: 1rem; /* Space between title and nav */
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+            header .container {
+                flex-direction: row;
+                justify-content: center; /* Center items horizontally in row */
+                gap: 2rem; /* More space between title and nav on larger screens */
+            }
+        }
+
+        header h1 {
+            font-weight: 800;
+            margin-bottom: 0; /* Remove margin-bottom from h1 */
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 1rem; /* space-x */
+            font-weight: 600;
+        }
+
+        header nav ul li a {
+            color: var(--color-accent-yellow);
+            text-decoration: none;
+            text-shadow: 2px 2px 0px #880000; /* Simple pixel shadow */
+            transition: color 0.1s linear; /* Fast transition */
+        }
+
+        header nav ul li a:hover {
+            color: white; /* Hover to white */
+        }
+
+        /* Section Styling */
+        section {
+            background-color: var(--color-bg-medium);
+            padding: 1.5rem; /* Reduced padding */
+            border: 2px solid var(--color-accent-yellow); /* Yellow border */
+            margin-bottom: 2rem; /* Spacing between sections */
+        }
+
+        section h2 {
+            font-weight: 700;
+            color: var(--color-accent-yellow);
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 0px black; /* Simple pixel shadow */
+        }
+
+        section p {
+            color: var(--color-text-light);
+            margin-bottom: 1rem;
+        }
+
+        section p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Card Layout for Monsters */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .card-item {
+            background-color: var(--color-bg-dark);
+            padding: 1rem;
+            border: 2px solid var(--color-border-grey);
+            transition: border-color 0.1s linear;
+            text-align: center; /* Center content in cards */
+        }
+
+        .card-item:hover {
+            border-color: var(--color-accent-yellow); /* Yellow border on hover */
+        }
+
+        .card-item img {
+            width: 5rem; /* Smaller images */
+            height: 5rem;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid var(--color-accent-yellow);
+            object-fit: cover;
+            margin-bottom: 0.5rem;
+            image-rendering: pixelated; /* Crucial for pixel art images */
+            -ms-interpolation-mode: nearest-neighbor; /* For older browsers */
+        }
+
+        .card-item .img-accent-red { /* For villain/dangerous monster images */
+            border-color: red; /* Red border for villains/dangerous entities */
+        }
+
+        .card-item h3 {
+            font-weight: 600;
+            color: var(--color-accent-yellow);
+            margin-bottom: 0.25rem;
+            text-shadow: 1px 1px 0px black;
+        }
+
+        .card-item p {
+            color: var(--color-text-light);
+            margin-bottom: 0;
+        }
+
+        .card-item ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+            color: var(--color-text-light);
+            line-height: 1.4;
+        }
+
+        .card-item ul li strong {
+            font-weight: 700;
+            color: var(--color-accent-yellow);
+        }
+
+        /* Quests Grid Layout */
+        .quests-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .quests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .quests-grid h3 {
+            font-weight: 600;
+            color: var(--color-accent-yellow);
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 0px black;
+        }
+
+        .quests-grid ul {
+            list-style-type: none; /* Removed default bullets */
+            padding-left: 0; /* Remove default padding */
+            margin: 0;
+            line-height: 1.5;
+            color: var(--color-text-light);
+        }
+
+        .quests-grid ul li {
+            position: relative;
+            padding-left: 1.2em; /* Space for custom bullet */
+            margin-bottom: 0.25em; /* Space between list items */
+        }
+
+        .quests-grid ul li::before {
+            content: '>'; /* Custom 8-bit bullet */
+            color: var(--color-accent-yellow);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        /* Items Table */
+        .table-container {
+            overflow-x: auto;
+            border: 2px solid var(--color-accent-yellow); /* Yellow border around table container */
+            margin-top: 1rem; /* Add some space above each table */
+            margin-bottom: 2rem; /* Add space below each table */
+        }
+
+        table {
+            width: 100%; /* Use 100% width instead of min-width */
+            background-color: var(--color-bg-dark);
+            border-collapse: collapse; /* Remove space between cells */
+        }
+
+        table thead tr {
+            background-color: var(--color-bg-medium);
+            color: var(--color-accent-yellow);
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.7rem;
+        }
+
+        table th, table td {
+            padding: 0.5rem 1rem;
+            text-align: left;
+            border: 1px solid var(--color-border-grey); /* Subtle grey borders for cells */
+        }
+
+        table tbody tr {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
+            font-weight: 300;
+            transition: background-color 0.1s linear;
+        }
+
+        table tbody tr:hover {
+            background-color: #3a3a3a; /* Lighter dark grey on hover */
+        }
+
+        table td.whitespace-nowrap {
+            white-space: nowrap;
+        }
+
+        /* FAQ Styling */
+        .faq-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            color: var(--color-accent-yellow);
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 0px black;
+        }
+
+        .faq-answer {
+            color: var(--color-text-light);
+            margin-left: 1em; /* Indent answer */
+        }
+
+
+        /* Footer Section */
+        footer {
+            background-color: black;
+            color: var(--color-text-light);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 4px solid var(--color-accent-yellow); /* Bold yellow border */
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer div {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        footer a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            transition: color 0.1s linear;
+        }
+
+        footer a:hover {
+            color: var(--color-accent-yellow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <h1>
+                SPRITELAND GAME GUIDE
+            </h1>
+            <!-- Navigation -->
+            <nav>
+                <ul>
+                    <li><a href="#quests">QUESTS</a></li>
+                    <li><a href="#monsters">MONSTERS</a></li>
+                    <li><a href="#pets">PETS</a></li>
+                    <li><a href="#items">ITEMS</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container">
+
+        <!-- Quests Section -->
+        <section id="quests">
+            <h2>QUESTS OF SPRITELAND</h2>
+            <div class="quests-grid">
+                <div>
+                    <h3>MAIN QUESTS</h3>
+                    <ul>
+                        <li><strong>QUEST:</strong> THE AWAKENING OF THE SUPREME BUG
+                            <ul>
+                                <li><strong>HOW TO DO:</strong> [PLACEHOLDER - FIND THE ANCIENT DATA FRAGMENTS, CONFRONT DIGITAL GLITCHES]</li>
+                                <li><strong>REQUIREMENTS:</strong> [PLACEHOLDER - PLAYER LEVEL 5, COMPLETE 'BASIC TRAINING' TUTORIAL]</li>
+                            </ul>
+                        </li>
+                        <li><strong>QUEST:</strong> RESTORING THE CODE OF HARMONY
+                            <ul>
+                                <li><strong>HOW TO DO:</strong> [PLACEHOLDER - COLLECT LOST ALGORITHMS, DEFEAT ELITE BUGS]</li>
+                                <li><strong>REQUIREMENTS:</strong> [PLACEHOLDER - PLAYER LEVEL 10, COMPLETE 'THE AWAKENING' QUEST]</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>SIDE QUESTS</h3>
+                    <ul>
+                        <li><strong>QUEST:</strong> THE MISSING SPRITE
+                            <ul>
+                                <li><strong>HOW TO DO:</strong> [PLACEHOLDER - SEARCH THE PIXEL MARKET, INTERVIEW NPC SPRITES]</li>
+                                <li><strong>REQUIREMENTS:</strong> [PLACEHOLDER - PLAYER LEVEL 3, TALK TO OLD PROGRAMMER IN TOWN SQUARE]</li>
+                            </ul>
+                        </li>
+                        <li><strong>QUEST:</strong> DATA LIBRARY REPAIR
+                            <ul>
+                                <li><strong>HOW TO DO:</strong> [PLACEHOLDER - GATHER CORRUPTED DATA PACKETS, REPAIR DAMAGED SERVERS]</li>
+                                <li><strong>REQUIREMENTS:</strong> [PLACEHOLDER - PLAYER LEVEL 7, ACCESS TO DATA LIBRARY ZONE]</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Monsters Section -->
+        <section id="monsters">
+            <h2>MONSTERS OF SPRITELAND</h2>
+            <div class="card-grid">
+                <!-- Monster Card 1 -->
+                <div class="card-item">
+                    <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=GOBLIN" alt="Goblin">
+                    <h3>GOBLIN GRUNT</h3>
+                    <p>
+                        COMMON FOE FOUND IN FORESTS. WEAK BUT CAN SWARM IN NUMBERS.
+                    </p>
+                    <ul>
+                        <li><strong>COMMON DROPS:</strong> [PLACEHOLDER]</li>
+                        <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
+                    </ul>
+                </div>
+                <!-- Monster Card 2 -->
+                <div class="card-item">
+                    <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=SLIME" alt="Slime">
+                    <h3>SLIME CUBE</h3>
+                    <p>
+                        SLOW-MOVING BUT RESILIENT. SPLITS INTO SMALLER SLIMES UPON DEFEAT.
+                    </p>
+                    <ul>
+                        <li><strong>COMMON DROPS:</strong> [PLACEHOLDER]</li>
+                        <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
+                    </ul>
+                </div>
+                <!-- Monster Card 3 -->
+                <div class="card-item">
+                    <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=DRAGON" alt="Dragon" class="img-accent-red">
+                    <h3>FOREST DRAGON</h3>
+                    <p>
+                        A RARE AND POWERFUL BEAST. REQUIRES TEAMWORK TO DEFEAT.
+                    </p>
+                    <ul>
+                        <li><strong>COMMON DROPS:</strong> [PLACEHOLDER]</li>
+                        <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
+                    </ul>
+                </div>
+                <!-- Monster Card 4 -->
+                <div class="card-item">
+                    <img src="https://placehold.co/150x150/1a1a1a/ffe600?text=SPECTER" alt="Specter">
+                    <h3>SHADOW SPECTER</h3>
+                    <p>
+                        GHOSTLY ENEMY WITH HIGH EVASION. DEALS ARCANE DAMAGE.
+                    </p>
+                    <ul>
+                        <li><strong>COMMON DROPS:</strong> [PLACEHOLDER]</li>
+                        <li><strong>HABITAT/LOCATION:</strong> [PLACEHOLDER]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pets Section (New Top-Level Section) -->
+        <section id="pets">
+            <h2>YOUR COMPANIONS: PETS</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>EFFECT</th>
+                            <th>SOURCE/HOW TO GET</th>
+                            <th>PROBABILITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=PET" alt="Rat Pet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RAT PET</td><td>PET</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=PET" alt="Sycophant" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">SYCOPHANT</td><td>PET</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=PET" alt="Rat with Hat Pet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RAT WITH HAT PET</td><td>PET</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Items Section -->
+        <section id="items">
+            <h2>ESSENTIAL ITEMS</h2>
+
+            <h3>ARMOR & ACCESSORIES</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>LVL REQUIREMENT</th>
+                            <th>STATS</th>
+                            <th>SOURCE/HOW TO GET</th>
+                            <th>PROBABILITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Yellow Wizard Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">YELLOW WIZARD HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=ARMOR" alt="Tin Chestplate" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">TIN CHESTPLATE</td><td>ARMOR (CHEST)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Dark Mage Hood" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DARK MAGE HOOD</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Dark Mage Gold Hood" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DARK MAGE GOLD HOOD</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=ARMOR" alt="Pink Chestplate" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">PINK CHESTPLATE</td><td>ARMOR (CHEST)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Discord Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DISCORD HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Crystal Hood" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">CRYSTAL HOOD</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Pink Jigsaw Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">PINK JIGSAW HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Frog Helm" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">FROG HELM</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>MEDIUM</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=BOOTS" alt="Golden Boots" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">GOLDEN BOOTS</td><td>ARMOR (FEET)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Degen Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DEGEN HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Green Cockroach Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">GREEN COCKROACH HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Wolf Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">WOLF HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Ronin Helm" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RONIN HELM</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HAT" alt="Witch Hat" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">WITCH HAT</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Helmet of Liberty" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">HELMET OF LIBERTY</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <!-- Events -->
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Fire Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">FIRE HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>13TH MARCH 2025 EVENT</td><td>EVENT REWARD</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=HELMET" alt="Knight Helmet" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">KNIGHT HELMET</td><td>ARMOR (HEAD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>27TH MARCH 2025 EVENT</td><td>EVENT REWARD</td></tr>
+                        <!-- Shops -->
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=BOOTS" alt="Boots of Haste" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BOOTS OF HASTE</td><td>ARMOR (FEET)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>SHOP</td><td>N/A</td></tr>
+                        <!-- From Initial List -->
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=ARMOR" alt="Dragonbone Armor" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DRAGONBONE ARMOR</td><td>ARMOR (CHEST)</td><td>[LVL REQ]</td><td>HIGH DEFENSE, FIRE RESISTANCE BONUS.</td><td>DEFEAT DRAGON BOSS</td><td>N/A</td></tr>
+                        <!-- MERGED SHIELDS -->
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=SHIELD" alt="Gold Shield" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">GOLD SHIELD</td><td>ARMOR (SHIELD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <!-- MERGED ACCESSORIES -->
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=RING" alt="Ruby Ring" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">RUBY RING</td><td>ACCESSORY (RING)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=AMULET" alt="Amulet of Wisdom" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">AMULET OF WISDOM</td><td>ACCESSORY (AMULET)</td><td>[LVL REQ]</td><td>+10 INTELLIGENCE, +5% XP GAIN</td><td>REWARD FROM 'LOST SCROLLS' QUEST</td><td>N/A</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>WEAPONS</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>LVL REQUIREMENT</th>
+                            <th>STATS</th>
+                            <th>SOURCE/HOW TO GET</th>
+                            <th>PROBABILITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Bronze Spear" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BRONZE SPEAR</td><td>WEAPON (SPEAR)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Bronze Sword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BRONZE SWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Iron Spear" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">IRON SPEAR</td><td>WEAPON (SPEAR)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Iron Sword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">IRON SWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Iron Scythe" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">IRON SCYTHE</td><td>WEAPON (SCYTHE)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Bronze Scythe" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BRONZE SCYTHE</td><td>WEAPON (SCYTHE)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Eye Sword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">EYE SWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Immutable Bow" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">IMMUTABLE BOW</td><td>WEAPON (BOW)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Scimitar" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">SCIMITAR</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>MEDIUM</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Bluemoon Staff" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">BLUEMOON STAFF</td><td>WEAPON (STAFF)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>MEDIUM</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Golem's Mace" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">GOLEM'S MACE</td><td>WEAPON (MACE)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Ice Staff" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">ICE STAFF</td><td>WEAPON (STAFF)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>VERY LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Candy Bow" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">CANDY BOW</td><td>WEAPON (BOW)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Tony Piercer" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">TONY PIERCER</td><td>WEAPON (DAGGER)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Royal Rapier" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">ROYAL RAPIER</td><td>WEAPON (RAPIER)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Firesword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">FIRESWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Magic Pink Sword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">MAGIC PINK SWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Sentinel Sword" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">SENTINEL SWORD</td><td>WEAPON (SWORD)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Executioner's Squeaky Hammer" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">EXECUTIONER'S SQUEAKY HAMMER</td><td>WEAPON (HAMMER)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Fire Staff" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">FIRE STAFF</td><td>WEAPON (STAFF)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=WEAPON" alt="Twilight Greataxe" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">TWILIGHT GREATAXE</td><td>WEAPON (AXE)</td><td>[LVL REQ]</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>POTIONS</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>EFFECT</th>
+                            <th>SOURCE/HOW TO GET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=POTION" alt="Elixir of Vitality" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">ELIXIR OF VITALITY</td><td>POTION</td><td>RESTORES FULL HEALTH AND MANA.</td><td>RARE MONSTER DROP, CRAFTING</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=POTION" alt="Potion of Greater Healing" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">POTION OF GREATER HEALING</td><td>POTION</td><td>RESTORES 500 HP INSTANTLY</td><td>VENDOR, DROPPED BY GOBLINS</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>MATERIALS</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>EFFECT</th>
+                            <th>SOURCE/HOW TO GET</th>
+                            <th>PROBABILITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=MATERIAL" alt="Dragon Scale" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">DRAGON SCALE</td><td>MATERIAL</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>LOW</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=SHARD" alt="T5 Shard" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">T5 SHARD</td><td>MATERIAL</td><td>[STATS PLACEHOLDER]</td><td>MOBS</td><td>N/A</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>QUEST ITEMS</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>TYPE</th>
+                            <th>EFFECT</th>
+                            <th>SOURCE/HOW TO GET</th>
+                            <th>PROBABILITY</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=KEY" alt="Puzzle Key" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">PUZZLE KEY</td><td>QUEST ITEM</td><td>[STATS PLACEHOLDER]</td><td>DROPPED BY MONSTERS: [PLACEHOLDER]</td><td>HIGH</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=RELIC" alt="Ancient Relic" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">ANCIENT RELIC</td><td>QUEST ITEM</td><td>REQUIRED FOR 'THE LOST ARTIFACT' QUEST.</td><td>PUZZLE SOLUTION, HIDDEN CHEST</td><td>N/A</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>SKINS</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>ITEM NAME</th>
+                            <th>SOURCE/HOW TO GET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=SKIN" alt="Cat Skin" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">CAT SKIN</td><td>BURN FOUNDERS NFT / SHOP</td></tr>
+                        <tr><td><img src="https://placehold.co/50x50/1a1a1a/ffe600?text=SKIN" alt="Skelly Skin" style="image-rendering: pixelated; width: 50px; height: 50px;"></td><td class="whitespace-nowrap">SKELLY SKIN</td><td>BURN FOUNDERS NFT / SHOP</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- FAQ Section (New Section) -->
+        <section id="faq">
+            <h2>FREQUENTLY ASKED QUESTIONS</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Q: WHAT IS SPRITELAND?</h3>
+                <p class="faq-answer">
+                    A: SPRITELAND IS A FREE-TO-PLAY, BROWSER-BASED MMORPG WHERE YOU CAN FREE ROAM, COMPLETE QUESTS, GATHER ITEMS, AND FIGHT MONSTERS IN A 2D FANTASY WORLD WITH A CRYPTOCURRENCY-BASED ECONOMY.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Q: HOW DO I EARN IN-GAME ITEMS?</h3>
+                <p class="faq-answer">
+                    A: ITEMS CAN BE OBTAINED THROUGH MONSTER DROPS (VARYING PROBABILITIES), COMPLETING QUESTS AND EVENTS, OR PURCHASING FROM IN-GAME SHOPS.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Q: ARE THERE GUILDS IN SPRITELAND?</h3>
+                <p class="faq-answer">
+                    A: YES, YOU CAN CREATE OR JOIN GUILDS WITH UP TO 50 MEMBERS TO SHARE ACHIEVEMENTS AND EXPERIENCE.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Q: WHAT ARE SKINS AND HOW ARE THEY OBTAINED?</h3>
+                <p class="faq-answer">
+                    A: SKINS ARE COSMETIC ITEMS THAT DO NOT AFFECT STATS OR LEVEL REQUIREMENTS. THEY CAN BE OBTAINED BY BURNING FOUNDERS NFTS OR PURCHASING THEM FROM THE IN-GAME SHOP.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Q: HOW DO I GET PETS IN SPRITELAND?</h3>
+                <p class="faq-answer">
+                    A: PETS CAN BE OBTAINED AS VERY LOW PROBABILITY DROPS FROM MONSTERS. ONCE OBTAINED, YOU CAN TRAIN THEM TO ASSIST YOU IN COMBAT.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AWESOME SPRITELAND GUIDE. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+</body>
+</html>
